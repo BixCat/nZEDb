@@ -53,6 +53,7 @@ switch ($page->page) {
 	case 'profile':
 	case 'profileedit':
 	case 'queue':
+	case 'radarr':
 	case 'register':
 	case 'sabqueuedata':
 	case 'search':

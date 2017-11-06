@@ -175,25 +175,79 @@
 	</table>
 	</fieldset>
 	{/if}
+	
 	<fieldset class="notop">
-	<nZEDblegend>CouchPotato Integration</nZEDblegend>
+			<nZEDblegend>Movie Type</nZEDblegend>
+			<table class="table table-condensed input">
+				<colgroup>
+					<col style="width: 150px;">
+				</colgroup>
+				<tr>
+					<th>Movie type:</th>
+					<td>
+						{html_options id="movietypeids" name='movietypeids' values=$movietypeids output=$movietypes selected=$user.movietype}
+						<span class="help-block">Pick the type of movie integration you wish to use, once you save your profile, the page will reload, the box will appear and you can fill out the details.</span>
+					</td>
+				</tr>
+			</table>
+		
+	{if $user.movietype == 1}
+		<nZEDblegend>CouchPotato Integration</nZEDblegend>
+		<table class="input">
+			<tr>
+				<td style="width:180px;"><label for="cp_api">CouchPotato API key:</label></td>
+				<td>
+					<input id="cp_api" class="long" name="cp_api" type="text" value="{$cp_api_selected}" />
+					<div class="hint">The CouchPotato api key. Used for 'Add To CouchPotato'.</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td style="width:180px;"><label for="cp_url">CouchPotato Url:</label></td>
+				<td>
+					<input id="cp_url" class="long" name="cp_url" type="text" value="{$cp_url_selected}" />
+					<div class="hint">The CouchPotato url. Used for 'Add To CouchPotato', for example: http://192.168.10.10:5050</div>
+				</td>
+			</tr>
+		</table>
+	{/if}	
+	{if $user.movietype == 2}
+	<nZEDblegend>Radarr Integration</nZEDblegend>
 	<table class="input">
 		<tr>
-			<td style="width:180px;"><label for="cp_api">CouchPotato API key:</label></td>
+			<td style="width:180px;"><label for="radarr_api">Radarr API key:</label></td>
 			<td>
-				<input id="cp_api" class="long" name="cp_api" type="text" value="{$cp_api_selected}" />
-				<div class="hint">The CouchPotato api key. Used for 'Add To CouchPotato'.</div>
+				<input id="radarr_api" class="long" name="radarr_api" type="text" value="{$radarr_api_selected}" />
+				<div class="hint">The Radarr api key. Used for 'Add To Radarr'.</div>
 			</td>
 		</tr>
 
 		<tr>
-			<td style="width:180px;"><label for="cp_url">CouchPotato Url:</label></td>
+			<td style="width:180px;"><label for="radarr_url">Radarr Url:</label></td>
 			<td>
-				<input id="cp_url" class="long" name="cp_url" type="text" value="{$cp_url_selected}" />
-				<div class="hint">The CouchPotato url. Used for 'Add To CouchPotato', for example: http://192.168.10.10:5050</div>
+				<input id="radarr_url" class="long" name="radarr_url" type="text" value="{$radarr_url_selected}" />
+				<div class="hint">The Radarr url. Used for 'Add To Radarr', for example: http://192.168.10.10:5050</div>
 			</td>
 		</tr>
+
+		<tr>
+				<td style="width:180px;"><label for="radarr_rootFolderPath">Radarr Movie Root Folder:</label></td>
+				<td>
+					<input id="radarr_rootFolderPath" class="long" name="radarr_rootFolderPath" type="text" value="{$radarr_rootfolderpath_selected}" />
+					<div class="hint">The Radarr Root Path. Used for 'Add To Radarr', for example: //mounts/movies</div>
+				</td>
+			</tr>
+
+			<tr>
+					<td style="width:180px;"><label for="radarr_qprofile">Radarr Quality Profile Index:</label></td>
+					<td>
+						<input id="radarr_qprofile" class="long" name="radarr_qprofile" type="number" value="{$radarr_qprofile_selected}" />
+						<div class="hint">The Radarr Quality Profile index #. Example: 4</div>
+					</td>
+				</tr>
 	</table>
+{/if}	
 	</fieldset>
+	
 	<input type="submit" value="Save Profile" />
 </form>

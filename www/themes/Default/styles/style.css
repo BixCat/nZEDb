@@ -464,7 +464,7 @@ table.data td.less {
 }
 
 table.data td.icons {
-    width: 64px;
+    width: 80px;
     margin-left: auto;
     margin-right: auto;
     white-space: nowrap;
@@ -1044,6 +1044,13 @@ div.icon_nzb a {
     text-decoration: none;
     padding-bottom: 2px;
     padding-right: 12px;
+}
+
+div.icon_radarr {
+    background: url('../../shared/img/icons/radarrup.png') no-repeat;
+}
+div.icon_radarr_clicked	{
+    background: url('../../shared/img/icons/radarrdown.png') no-repeat;
 }
 
 div.icon_imdb {

@@ -148,6 +148,7 @@ jQuery(function ($) {
     $('#nzb_multi_operations_form').submit(function () {
         return false;
     });
+
     $('input.nzb_multi_operations_download').click(function () {
         var ids = "";
         $("table.data INPUT[type='checkbox']:checked").each(function (i, row) {
@@ -157,6 +158,33 @@ jQuery(function ($) {
         ids = ids.substring(0, ids.length - 1);
         if (ids)
             window.location = SERVERROOT + "getnzb?zip=1&id=" + ids;
+    });
+    $('input.nzb_multi_operations_radarr').on('click', (function(){        
+        var ids = "";        
+        $("table.data INPUT[type='checkbox']:checked").each(function (i, row) {
+            if ($(row).val() != "on")
+                ids += $(row).val() + ',';
+        });
+        ids = ids.substring(0, ids.length - 1);
+        if (ids){
+            var radarrurl = SERVERROOT + "radarr?id=" + ids;
+            $.post(radarrurl, function(resp){
+               // $(e.target).addClass('icon_cp_clicked').attr('title','Added to Radarr');
+                createGrowl('Added to Radarr');
+            });
+        }
+    }));
+    $('.icon_radarr').click(function (e) { 
+        if ($(this).hasClass('icon_radarr_clicked')) {
+            return false;
+        }        
+        var guid = $(this).parent().parent().attr('id').substring(4);
+        var radarrurl = SERVERROOT + "radarr?id=" + guid;
+        $.post(radarrurl, function(resp){
+            $(e.target).addClass('icon_radarr_clicked').attr('title', 'Added to Radarr');
+            createGrowl('Added to Radarr');
+        });
+        return false;
     });
     $('input.nzb_multi_operations_cart').click(function () {
         var guids = new Array();

@@ -28,6 +28,11 @@ $cpurl = $user['cp_url'];
 $page->smarty->assign('cpapi', $cpapi);
 $page->smarty->assign('cpurl', $cpurl);
 
+$radarrapi = $user['radarr_api'];
+$radarrurl = $user['radarr_url'];
+$page->smarty->assign('radarrapi', $radarrapi);
+$page->smarty->assign('radarrurl', $radarrurl);
+
 $catarray = [];
 $catarray[] = $category;
 

@@ -39,6 +39,13 @@ class Users
 	const QUEUE_NZBGET  = 2;
 
 	/**
+	 * Users select movie downloader.
+	 */
+	const MOVIE_NONE    = 0;
+	const MOVIE_COUCHPOTATO = 1;
+	const MOVIE_RADARR  = 2;
+
+	/**
 	 * @var \nzedb\db\Settings
 	 */
 	public $pdo;
@@ -272,8 +279,13 @@ class Users
 	 * @param        $bookView
 	 * @param bool   $cp_url
 	 * @param bool   $cp_api
+	 * @param bool   $radarr_url
+	 * @param bool   $radarr_api
+	 * @param bool   $radarr_rootFolderPath
+	 * @param bool   $radarr_qprofile
 	 * @param string $style
 	 * @param string $queueType
+	 * @param string $movieType
 	 * @param string $nzbGetURL
 	 * @param string $nzbGetUsername
 	 * @param string $nzbGetPassword
@@ -286,7 +298,7 @@ class Users
 	 */
 	public function update($id, $userName, $firstName, $lastName, $email, $grabs, $role, $invites,
 		$movieView, $xxxView, $musicView, $consoleView, $gameView, $bookView,
-		$cp_url = false, $cp_api = false, $style = 'None', $queueType = '',
+		$cp_url = false, $cp_api = false, $radarr_url = false, $radarr_api = false, $radarr_rootFolderPath = false, $radarr_qprofile = false, $style = 'None', $queueType = '', $movieType = '',
 		$nzbGetURL = '', $nzbGetUsername = '', $nzbGetPassword = '',
 		$sabURL = '', $sabApiKey = '', $sabPriority = '', $sabApiKeyType = '')
 	{
@@ -340,6 +352,11 @@ class Users
 			$sql[] = sprintf('queuetype = %d', $queueType);
 		}
 
+		if ($movieType !== '') {
+			$sql[] = sprintf('movieType = %d', $movieType);
+		}
+
+
 		if ($nzbGetURL !== '') {
 			$sql[] = sprintf('nzbgeturl = %s', $this->pdo->escapeString($nzbGetURL));
 		}
@@ -366,8 +383,21 @@ class Users
 		if ($cp_api !== false) {
 			$sql[] = sprintf('cp_api = %s', $this->pdo->escapeString($cp_api));
 		}
-		$this->pdo->queryExec(sprintf("UPDATE users SET %s WHERE id = %d", implode(', ', $sql), $id));
 
+		if ($radarr_url !== false) {
+			$sql[] = sprintf('radarr_url = %s', $this->pdo->escapeString($radarr_url));
+		}
+		if ($radarr_api !== false) {
+			$sql[] = sprintf('radarr_api = %s', $this->pdo->escapeString($radarr_api));
+		}
+		if ($radarr_rootFolderPath !== false) {
+			$sql[] = sprintf('radarr_rootFolderPath = %s', $this->pdo->escapeString($radarr_rootFolderPath));
+		}
+		if ($radarr_qprofile !== false) {
+			$sql[] = sprintf('radarr_qprofile = %s', $this->pdo->escapeString($radarr_qprofile));
+		}
+
+		$this->pdo->queryExec(sprintf("UPDATE users SET %s WHERE id = %d", implode(', ', $sql), $id));
 		return self::SUCCESS;
 	}
 

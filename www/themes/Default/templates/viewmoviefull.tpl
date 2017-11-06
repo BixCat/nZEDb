@@ -36,6 +36,9 @@
 					<input type="button" class="nzb_multi_operations_download btn btn-small btn-success" value="Download NZBs" />
 					<input type="button" class="nzb_multi_operations_cart btn btn-small btn-info" value="Send to my Cart" />
 					{if $sabintegrated}<input type="button" class="nzb_multi_operations_sab btn btn-small btn-primary" value="Send to queue" />{/if}
+					{if !empty($cpurl) && !empty($cpapi)}<input type="button" class="nzb_multi_sendtocouch btn btn-small btn-primary" value="Send to Couch"/>{/if}
+					{if !empty($radarrurl) && !empty($radarrapi)}<input type="button" class="nzb_multi_operations_radarr btn btn-small btn-primary" value="Send to Radarr"/>{/if}
+			
 				</div>
 				<div class="btn-group pull-right">
 					<div class="input-append">

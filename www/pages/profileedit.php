@@ -78,10 +78,15 @@ switch ($action) {
 					(isset($_POST['consoleview']) ? "1" : "0"),
 					(isset($_POST['gameview']) ? "1" : "0"),
 					(isset($_POST['bookview']) ? "1" : "0"),
-					$_POST['cp_url'],
-					$_POST['cp_api'],
+					(isset($_POST['cp_url']) ? $_POST['cp_url'] : ''),
+					(isset($_POST['cp_api']) ? $_POST['cp_api'] : ''),
+					(isset($_POST['radarr_url']) ? $_POST['radarr_url'] : ''),
+					(isset($_POST['radarr_api']) ? $_POST['radarr_api'] : ''),
+					(isset($_POST['radarr_rootFolderPath']) ? $_POST['radarr_rootFolderPath'] : ''),
+					(isset($_POST['radarr_qprofile']) ? $_POST['radarr_qprofile'] : ''),
 					$_POST['style'],
 					$_POST['queuetypeids'],
+					$_POST['movietypeids'],
 					(isset($_POST['nzbgeturl']) ? $_POST['nzbgeturl'] : ''),
 					(isset($_POST['nzbgetusername']) ? $_POST['nzbgetusername'] : ''),
 					(isset($_POST['nzbgetpassword']) ? $_POST['nzbgetpassword'] : ''),
@@ -144,8 +149,17 @@ switch ($sab->integrated) {
 }
 
 $page->smarty->assign(array(
-		'queuetypes' => $queueTypes,
-		'queuetypeids' => $queueTypeIDs
+	'queuetypes' => $queueTypes,
+	'queuetypeids' => $queueTypeIDs
+)
+);
+
+$movieTypes = array('None', 'Couch Potato', 'Radarr');
+$movieTypeIDs = array(Users::MOVIE_NONE, Users::MOVIE_COUCHPOTATO, Users::MOVIE_RADARR);
+
+$page->smarty->assign(array(
+		'movietypes' => $movieTypes,
+		'movietypeids' => $movieTypeIDs
 	)
 );
 
@@ -155,6 +169,11 @@ $page->meta_description = "Edit User Profile for " . $data["username"];
 
 $page->smarty->assign('cp_url_selected', $data['cp_url']);
 $page->smarty->assign('cp_api_selected', $data['cp_api']);
+
+$page->smarty->assign('radarr_url_selected', $data['radarr_url']);
+$page->smarty->assign('radarr_api_selected', $data['radarr_api']);
+$page->smarty->assign('radarr_rootfolderpath_selected', $data['radarr_rootfolderpath']);
+$page->smarty->assign('radarr_qprofile_selected', $data['radarr_qprofile']);
 
 $page->smarty->assign('catlist', $category->getForSelect(false));
 

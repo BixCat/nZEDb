@@ -70,6 +70,7 @@
 		Url: {if $user.cp_url == ''}N/A{else}{$user.cp_url}{/if}<br/>
 		Key: {if $user.cp_api == ''}N/A{else}{$user.cp_api}{/if}<br/>
 	</td>
+	</tr>
 	{/if}
 
 	{if !$publicview}

@@ -119,6 +119,7 @@
 										Couch
 									</a>
 								{/if}
+								
 							</div>
 						</div>
 					</td>
@@ -195,6 +196,10 @@
 											{if $sabintegrated}
 												<div class="icon icon_sab" title="Send to my Queue"></div>
 											{/if}
+											{if !empty($radarrurl) && !empty($radarrapi)}
+												<div class="icon icon_radarr" title="Add to Radarr"></div>										
+											{/if}
+											
 										</td>
 									</tr>
 									{if $m@index == 1 && $m@total > 2}

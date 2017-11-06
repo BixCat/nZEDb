@@ -122,7 +122,6 @@ jQuery(function($){
         });
         return false;
     });
-
     $('.vortexsend').click(function(event)
     {
         if ($(this).hasClass('icon_nzbvortex_clicked')) return false;
@@ -499,7 +498,18 @@ jQuery(function($){
 
 
     $('button.nzb_multi_operations_download').on('click', (function(){
-        var ids = "";
+        var ids = "";      
+        $("table.data INPUT[type='checkbox']:checked").each( function (i, row) {
+            if ($(row).val()!="on")
+                ids += $(row).val()+',';
+        });
+        
+        ids = ids.substring(0,ids.length-1);
+            window.location = SERVERROOT + "getnzb?zip=1&id="+ids;
+    }));
+
+    $('input.nzb_multi_operations_download_cart').on('click', (function(){
+        var ids = "";        
         $("table.data INPUT[type='checkbox']:checked").each( function (i, row) {
             if ($(row).val()!="on")
                 ids += $(row).val()+',';
@@ -509,16 +519,7 @@ jQuery(function($){
             window.location = SERVERROOT + "getnzb?zip=1&id="+ids;
     }));
 
-    $('input.nzb_multi_operations_download_cart').on('click', (function(){
-        var ids = "";
-        $("table.data INPUT[type='checkbox']:checked").each( function (i, row) {
-            if ($(row).val()!="on")
-                ids += $(row).val()+',';
-        });
-        ids = ids.substring(0,ids.length-1);
-        if (ids)
-            window.location = SERVERROOT + "getnzb?zip=1&id="+ids;
-    }));
+    
 
 
     $('button.nzb_multi_operations_cart').on('click', (function(){
@@ -581,6 +582,8 @@ jQuery(function($){
             $(this).attr('checked', false);
         });
     }));
+   
+        
     $('input.nzb_multi_operations_nzbget').on('click', (function(){
         $("table.data INPUT[type='checkbox']:checked").each( function(i, row) {
             var $nzbgetIcon = $(row).parent().parent().children('td.icons').children('.icon_nzbget');
